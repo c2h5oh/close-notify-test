@@ -11,9 +11,9 @@ go:
 
 env:
   - matrix:
-    - CONCURENCY=1
+    #- CONCURENCY=1
     #- CONCURENCY=4
-    #- CONCURENCY=16
+    - CONCURENCY=16
     #- CONCURENCY=64
     #- CONCURENCY=256
     #- CONCURENCY=1024
@@ -21,8 +21,8 @@ env:
 
 install:
   - sudo apt-get install apache2-utils
-  - go get -u github.com/pressly/chi
-  - go run ${TRAVIS_BUILD_DIR}/main.go &
+  - go get -u github.com/pressly/chi  
 
 script:
+  - go run ${TRAVIS_BUILD_DIR}/main.go &
   - ab -n 2048 -c ${CONCURENCY} http://127.0.0.1:3333/
