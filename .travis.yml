@@ -22,7 +22,7 @@ env:
 install:
   - sudo apt-get install apache2-utils
   - go get -u github.com/pressly/chi
-  - go run main.go &
+  - go run ${TRAVIS_BUILD_DIR}/main.go &
 
 script:
-  - ab -n 2048 -c $CONCURENCY http://127.0.0.1:3333/
+  - ab -n 2048 -c ${CONCURENCY} http://127.0.0.1:3333/
