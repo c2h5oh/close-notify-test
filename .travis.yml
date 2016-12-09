@@ -3,21 +3,17 @@ sudo: true
 language: go
 go:
   - 1.7
-  #- 1.7.1
-  #- 1.7.2
-  #- 1.7.3
-  #- 1.7.4
-  #- 1.8beta1
+  - 1.7.1
+  - 1.7.2
+  - 1.7.3
+  - 1.7.4
+  - 1.8beta1
 
 env:
   - matrix:
-    #- CONCURENCY=1
-    #- CONCURENCY=4
+    - CONCURENCY=1
     - CONCURENCY=16
-    #- CONCURENCY=64
-    #- CONCURENCY=256
-    #- CONCURENCY=1024
-
+    - CONCURENCY=256
 
 install:
   - sudo apt-get install apache2-utils
@@ -25,4 +21,4 @@ install:
 
 script:
   - go run test.go &
-  - sleep 10 && ab -n 2048 -c ${CONCURENCY} http://127.0.0.1:3333/
+  - sleep 10 && ab -n 512 -c ${CONCURENCY} http://127.0.0.1:3333/
