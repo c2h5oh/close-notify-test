@@ -1,0 +1,28 @@
+sudo: true
+
+language: go
+go:
+  - 1.7
+  - 1.7.1
+  - 1.7.2
+  - 1.7.3
+  - 1.7.4
+  - 1.8beta1
+
+env:
+  - matrix:
+    - CONCURENCY=1
+    - CONCURENCY=4
+    - CONCURENCY=16
+    - CONCURENCY=64
+    - CONCURENCY=256
+    - CONCURENCY=1024
+
+
+install:
+  - apt-get install apache2-utils
+  - go get -u github.com/pressly/chi
+  - go run main.go &
+
+script:
+  - ab -n 2048 -c $CONCURENCY http://127.0.0.1:3333/
